@@ -1,4 +1,4 @@
-#명령 프롬프트에서 pip install requests로 웹요청 모듈 설치
+#pip install requests, hgtk
 import requests, hgtk, random
 
 #이미 있는 단어 알기위해 단어목록 저장
