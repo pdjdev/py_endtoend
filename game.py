@@ -110,7 +110,7 @@ while(playing):
 
             if wordOK:
                 #단어의 유효성을 체크
-                url = 'https://krdict.korean.go.kr/api/search?key=5952ED12C2378685A8F4087BCD0398F7&part=word&pos=1&q=' + query
+                url = 'https://krdict.korean.go.kr/api/search?key=[APIKEY]&part=word&pos=1&q=' + query
                 response = requests.get(url)
                 #단어 목록을 불러오기
                 words = midReturn_all(response.text, '<word>', '</word>') #단어 불러오기
