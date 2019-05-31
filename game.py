@@ -1,4 +1,4 @@
-#pip install requests, hgtk
+#pip install requests hgtk
 import requests, hgtk, random
 
 #이미 있는 단어 알기위해 단어목록 저장
