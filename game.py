@@ -175,7 +175,7 @@ while(playing):
             break
         else:
             answord = midReturn(ans, '<word>', '</word>') #단어 불러오기
-            ansdef = midReturn(ans, '<definition>', '</definition>') #품사 불러오기
+            ansdef = midReturn(ans, '<definition>', '</definition>') # 불러오기
             history.append(answord)
             
             print(query, '>', answord, '\n('+ansdef+')\n')
