@@ -90,12 +90,14 @@ print('''
 ==========================================
 ''')
 
+answord = ''
+
 while(playing):
 
     wordOK = False
 
     while(not wordOK):
-        query = input('나> ')
+        query = input(answord + ' > ')
         wordOK = True
         
         if query == '/그만':
@@ -119,7 +121,7 @@ while(playing):
                 sdis = hgtk.letter.decompose(sword)
                 qdis = hgtk.letter.decompose(query[0])
                 if sdis[0] == 'ㄹ' and qdis[0] == 'ㄴ': print('두음법칙 적용됨')
-                elif sdis[0] == 'ㄹ' and qdis[0] == 'ㅇ' and qdis[1] in ('ㅑ', 'ㅕ', 'ㅛ', 'ㅠ', 'ㅒ', 'ㅖ'): print('두음법칙 적용됨')
+                elif (sdis[0] == 'ㄹ' or sdis[0] == 'ㄴ') and qdis[0] == 'ㅇ' and qdis[1] in ('ㅣ', 'ㅑ', 'ㅕ', 'ㅛ', 'ㅠ', 'ㅒ', 'ㅖ'): print('두음법칙 적용됨')
                 else:
                     wordOK = False
                     print(sword + '(으)로 시작하는 단어여야 합니다.')
@@ -176,8 +178,8 @@ while(playing):
             ansdef = midReturn(ans, '<definition>', '</definition>') #품사 불러오기
             history.append(answord)
             
-            print('컴퓨터>', answord, '\n('+ansdef+')\n')
-            sword = history[len(history)-1][len(history[len(history)-1])-1]
+            print(query, '>', answord, '\n('+ansdef+')\n')
+            sword = answord[len(answord)-1]
             
             #컴퓨터 승리여부 체크            
             #if findword(sword) == '':
