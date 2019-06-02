@@ -74,19 +74,15 @@ def checkexists(query):
 
 print('''
 =============파이썬 끝말잇기===============
-
 사전 데이터 제공: 국립국어원 한국어기초사전
-
 - - - 게임 방법 - - -
 가장 처음 단어를 제시하면 끝말잇기가 시작됩니다
 '/그만'을 입력하면 게임이 종료되며, '/다시'를 입력하여 게임을 다시 시작할 수 있습니다.
-
 - - - 게임 규칙 - - -
 1. 사전에 등재된 명사여야 합니다
 2. 적어도 단어의 길이가 두 글자 이상이어야 합니다
 3. 이미 사용한 단어를 다시 사용할 수 없습니다
 4. 두음법칙 적용 가능합니다 (ex. 리->니)
-
 ==========================================
 ''')
 
@@ -105,6 +101,7 @@ while(playing):
             break
         elif query == '/다시':
             history = []
+            answord = ''
             print('게임을 다시 시작합니다.')
             wordOK = False
         else:         
@@ -115,37 +112,38 @@ while(playing):
                     print('단어를 입력하여 끝말잇기를 시작합니다.')
                 else:
                     print(sword + '(으)로 시작하는 단어를 입력해 주십시오.')
-            
-            #첫 글자의 초성 분석하여 두음법칙 적용 -> 규칙에 아직 완벽하게 맞지 않으므로 차후 수정 필요
-            if not len(history)==0 and not query[0] == sword and not query=='':
-                sdis = hgtk.letter.decompose(sword)
-                qdis = hgtk.letter.decompose(query[0])
-                if sdis[0] == 'ㄹ' and qdis[0] == 'ㄴ': print('두음법칙 적용됨')
-                elif (sdis[0] == 'ㄹ' or sdis[0] == 'ㄴ') and qdis[0] == 'ㅇ' and qdis[1] in ('ㅣ', 'ㅑ', 'ㅕ', 'ㅛ', 'ㅠ', 'ㅒ', 'ㅖ'): print('두음법칙 적용됨')
-                else:
-                    wordOK = False
-                    print(sword + '(으)로 시작하는 단어여야 합니다.')
-                
-            if len(query) == 1:
-                wordOK = False
-                print('적어도 두 글자가 되어야 합니다')
-
-            if query in history:
-                wordOK = False
-                print('이미 입력한 단어입니다')
-
-            if query[len(query)-1] in blacklist:
-                print('아.. 좀 치사한데요..')
-
-            if wordOK:
-                #단어의 유효성을 체크
-                ans = checkexists(query)
-                if ans == '':
-                    wordOK = False
-                    print('유효한 단어를 입력해 주십시오')
-                else:
-                    print('(' + midReturn(ans, '<definition>', '</definition>') + ')\n')
                     
+            else:
+                #첫 글자의 초성 분석하여 두음법칙 적용 -> 규칙에 아직 완벽하게 맞지 않으므로 차후 수정 필요
+                if not len(history)==0 and not query[0] == sword and not query=='':
+                    sdis = hgtk.letter.decompose(sword)
+                    qdis = hgtk.letter.decompose(query[0])
+                    if sdis[0] == 'ㄹ' and qdis[0] == 'ㄴ': print('두음법칙 적용됨')
+                    elif (sdis[0] == 'ㄹ' or sdis[0] == 'ㄴ') and qdis[0] == 'ㅇ' and qdis[1] in ('ㅣ', 'ㅑ', 'ㅕ', 'ㅛ', 'ㅠ', 'ㅒ', 'ㅖ'): print('두음법칙 적용됨')
+                    else:
+                        wordOK = False
+                        print(sword + '(으)로 시작하는 단어여야 합니다.')
+                    
+                if len(query) == 1:
+                    wordOK = False
+                    print('적어도 두 글자가 되어야 합니다')
+
+                if query in history:
+                    wordOK = False
+                    print('이미 입력한 단어입니다')
+
+                if query[len(query)-1] in blacklist:
+                    print('아.. 좀 치사한데요..')
+
+                if wordOK:
+                    #단어의 유효성을 체크
+                    ans = checkexists(query)
+                    if ans == '':
+                        wordOK = False
+                        print('유효한 단어를 입력해 주십시오')
+                    else:
+                        print('(' + midReturn(ans, '<definition>', '</definition>') + ')\n')
+                        
     history.append(query)
     
     if playing:       
@@ -184,4 +182,3 @@ while(playing):
             #컴퓨터 승리여부 체크            
             #if findword(sword) == '':
             #    print('tip: \'/다시\'를 입력하여 게임을 다시 시작할 수 있습니다')
-            
