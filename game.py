@@ -8,7 +8,7 @@ playing = True
 apikey = ''
 
 #좀 치사한 한방단어 방지 목록
-blacklist = ['즘', '틱', '늄', '슘', '퓸', '늬', '뺌', '섯', '숍']
+blacklist = ['즘', '틱', '늄', '슘', '퓸', '늬', '뺌', '섯', '숍', '튼', '름', '늠', '쁨']
 
 #지정한 두 개의 문자열 사이의 문자열을 리턴하는 함수
 #string list에서 단어, 품사와 같은 요소들을 추출할때 사용됩니다
@@ -52,7 +52,7 @@ def findword(query):
 
 
 def checkexists(query):
-    url = 'https://krdict.korean.go.kr/api/search?key=' + apikey + '&part=word&pos=1&q=' + query
+    url = 'https://krdict.korean.go.kr/api/search?key=' + apikey + '&part=word&sort=popular&num=100&pos=1&q=' + query
     response = requests.get(url)
     ans = ''
 
@@ -87,6 +87,7 @@ print('''
 ''')
 
 answord = ''
+sword = ''
 
 while(playing):
 
@@ -98,11 +99,12 @@ while(playing):
         
         if query == '/그만':
             playing = False
+            print('컴퓨터의 승리!')      
             break
         elif query == '/다시':
             history = []
             answord = ''
-            print('게임을 다시 시작합니다.')
+            print('게임을 다시 시작합니다.')       
             wordOK = False
         else:         
             if query == '':
