@@ -109,5 +109,8 @@ while(playing):
                 if com_answer == '':
                     print('You Win!')
                     break
+                else:
+                    history.append(com_answer)
+            
+                history.append(query)
 
-    history.append(query)
